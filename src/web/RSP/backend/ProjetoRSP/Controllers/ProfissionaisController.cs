@@ -30,6 +30,17 @@ namespace ProjetoRSP.Controllers
             });
         }
 
+        [HttpGet("{profissionalId}")]
+        public ProfissionalViewModel GetById(int profissionalId)
+        {
+            return _context.Profissionais.Where(p => p.Id == profissionalId).Select(p => new ProfissionalViewModel
+            {
+                Id = p.Id,
+                Nome = p.Pessoa.Nome,
+                CodProfissional = p.CodProfissional
+            }).FirstOrDefault();
+        }
+
         [HttpPost]
         public IActionResult Post(ProfissionalRequest request)
         {
