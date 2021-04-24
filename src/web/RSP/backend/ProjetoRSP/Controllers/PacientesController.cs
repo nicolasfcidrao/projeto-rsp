@@ -53,5 +53,15 @@ namespace ProjetoRSP.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("{pacienteId}")]
+        public IActionResult Delete(int pacienteId)
+        {
+            Paciente p = new Paciente();
+            p.Id = pacienteId;
+            _context.Remove(p);
+            _context.SaveChanges();
+            return Ok();
+        }
     }
 }
