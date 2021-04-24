@@ -29,6 +29,7 @@ namespace ProjetoRSP.Controllers
                 NomePaciente = p.Paciente.Pessoa.Nome,
                 ProfissionalId = p.Profissional.Pessoa.Id,
                 ProfissionalNome = p.Profissional.Pessoa.Nome,
+                CodProfissional = p.Profissional.CodProfissional
             });
         }
 

@@ -14,10 +14,14 @@ namespace ProjetoRSP.Models
         public int PessoaId { get; set; }
         public Pessoa Pessoa { get; set; }
         public List<PacienteAlergia> PacienteAlergias { get; set; } = new List<PacienteAlergia>();
+        public string NomeDaMae { get; set; }
+        public string NomeDoPai { get; set; }
+        public bool InfectadoCovid { get; set; }
+        public int QuantasVezesInfectado { get; set; }
 
         public Paciente() { }
 
-        public Paciente(string logradouro, int numero, string bairro, string cidade, string estado, string cep, int pessoaId, string complemento)
+        public Paciente(string logradouro, int numero, string bairro, string cidade, string estado, string cep, int pessoaId, string complemento, string nomeDaMae, string nomeDoPai, bool infectadoCovid, int quantasVezesInfectado)
         {
             Logradouro = logradouro;
             Numero = numero;
@@ -27,6 +31,10 @@ namespace ProjetoRSP.Models
             Cep = cep;
             PessoaId = pessoaId;
             Complemento = complemento;
+            NomeDaMae = nomeDaMae;
+            NomeDoPai = nomeDoPai;
+            InfectadoCovid = infectadoCovid;
+            QuantasVezesInfectado = quantasVezesInfectado;
         }
     }
 }

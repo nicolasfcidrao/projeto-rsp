@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetoRSP.Infra;
 using ProjetoRSP.Models;
 using ProjetoRSP.Shared.Requests;
+using ProjetoRSP.Shared.Requests.Validators;
 using ProjetoRSP.Shared.ViewModels;
 
 namespace ProjetoRSP.Controllers
@@ -42,13 +43,16 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(ProfissionalRequest request)
+        public IActionResult Post(ProfissionalRequest request, [FromServices] ProfissionalRequestValidator validator)
         {
+            var validationResult = validator.Validate(request);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
             if (_context.Pessoas.Any(p => p.Cpf == request.Cpf || p.Email == request.Email || p.Rg == request.Rg))
                 return BadRequest("Pessoa já existe na base de dadox :(");
 
-            var pessoa = new Pessoa(request.Cpf, request.Rg, request.Nome, request.Email, request.DataNascimento, request.Celular, request.Senha);
-            var profissional = new Profissional(request.CodProfissional, request.Especialidade, request.RazaoSocial, request.Cnpj, default);
+            var pessoa = new Pessoa(request.Cpf, request.Rg, request.Nome, request.Email, request.DataNascimento, request.Celular, request.Senha, request.ContatoEmergencia, request.TipoSanguineo, request.Sexo);
+            var profissional = new Profissional(request.CodProfissional, request.Especialidade1, request.Especialidade2, request.RazaoSocial1, request.RazaoSocial2, request.Cnpj, default);
             profissional.Pessoa = pessoa;
             _context.Profissionais.Add(profissional);
             _context.SaveChanges();

@@ -11,7 +11,7 @@ namespace ProjetoRSP.Shared.ViewModels
         public string NomePaciente { get; set; }
         public int ProfissionalId { get; set; }
         public string ProfissionalNome { get; set; }
-        public int CodProfissional { get; set; }
+        public string CodProfissional { get; set; }
 
     }
 }

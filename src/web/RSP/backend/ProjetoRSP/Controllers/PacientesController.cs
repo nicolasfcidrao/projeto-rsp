@@ -45,8 +45,8 @@ namespace ProjetoRSP.Controllers
             if (_context.Pessoas.Any(p => p.Cpf == request.Cpf || p.Email == request.Email || p.Rg == request.Rg))
                 return BadRequest("Pessoa já existe na base de dadox :(");
 
-            var pessoa = new Pessoa(request.Cpf, request.Rg, request.Nome, request.Email, request.DataNascimento, request.Celular, request.Senha);
-            var paciente = new Paciente(request.Logradouro, request.Numero, request.Bairro, request.Cidade, request.Estado, request.Celular, default, request.Complemento);
+            var pessoa = new Pessoa(request.Cpf, request.Rg, request.Nome, request.Email, request.DataNascimento, request.Celular, request.Senha, request.ContatoEmergencia, request.TipoSanguineo, request.Sexo);
+            var paciente = new Paciente(request.Logradouro, request.Numero, request.Bairro, request.Cidade, request.Estado, request.Celular, default, request.Complemento, request.NomeDaMae, request.NomeDoPai, request.InfectadoCovid, request.QuantasVezesInfectado);
             paciente.Pessoa = pessoa;
             _context.Pacientes.Add(paciente);
             _context.SaveChanges();

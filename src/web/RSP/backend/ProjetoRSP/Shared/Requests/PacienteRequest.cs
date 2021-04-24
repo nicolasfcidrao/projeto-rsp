@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoRSP.Shared.Enum;
+using System;
 
 namespace ProjetoRSP.Shared.Requests
 {
@@ -11,6 +12,8 @@ namespace ProjetoRSP.Shared.Requests
         public DateTimeOffset DataNascimento { get; set; }
         public string Celular { get; set; }
         public string Senha { get; set; }
+        public string ContatoEmergencia { get; set; }
+        public TipoSanguineo TipoSanguineo { get; set; }
         public string Logradouro { get; set; }
         public int Numero { get; set; }
         public string Complemento { get; set; }
@@ -18,5 +21,10 @@ namespace ProjetoRSP.Shared.Requests
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string Cep { get; set; }
+        public string NomeDaMae { get; set; }
+        public string NomeDoPai { get; set; }
+        public bool InfectadoCovid { get; set; }
+        public int QuantasVezesInfectado { get; set; }
+        public Sexo Sexo { get; set; }
     }
 }
