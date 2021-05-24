@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  sqlexpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.sqlexpress
+    image: sql-server/mssql-fts:2017
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Tweetbook@123
+      - MSSQL_AGENT_ENABLED=true
+    ports: 
+      - "1433:1433"
+    container_name: mssql
+    volumes:
+        - sqlexpress-data:/var/opt/mssql/data
+
+volumes:
+    sqlexpress-data:
