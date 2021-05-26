@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProjetoRSP.Infra;
 using System;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ProjetoRSP
 {
@@ -35,6 +38,30 @@ namespace ProjetoRSP
                 options.UseSqlServer(connectionString);
             });
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+
+            //JWT Authentication
+            var key = Encoding.UTF8.GetBytes(Configuration["JwtSettings:Secret"]);
+            var tokenParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero,
+
+            };
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = tokenParameters;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
