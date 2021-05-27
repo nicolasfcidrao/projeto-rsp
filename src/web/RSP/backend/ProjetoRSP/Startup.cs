@@ -11,6 +11,7 @@ using System;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ProjectRSP.Shared.DTOs;
 
 namespace ProjetoRSP
 {
@@ -26,6 +27,10 @@ namespace ProjetoRSP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var jwtSettings = new JwtSettings();
+            Configuration.Bind(nameof(JwtSettings), jwtSettings);
+            services.AddSingleton(jwtSettings);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -40,7 +45,7 @@ namespace ProjetoRSP
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             //JWT Authentication
-            var key = Encoding.UTF8.GetBytes(Configuration["JwtSettings:Secret"]);
+            var key = Encoding.UTF8.GetBytes(jwtSettings.Secret);
             var tokenParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
