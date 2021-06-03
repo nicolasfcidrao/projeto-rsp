@@ -80,7 +80,8 @@ namespace ProjetoRSP
             using (context)
             {
                 //context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
 
             app.UseHttpsRedirection();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectRSP.Models;
 using ProjetoRSP.Models;
 using ProjetoRSP.Shared.Extensions;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace ProjetoRSP.Infra
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Alergia> Alergias { get; set; }
         public DbSet<PacienteAlergia> PacienteAlergias { get; set; }
+        public DbSet<PessoaRole> PessoaRoles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public ProjectRSPContext(DbContextOptions<ProjectRSPContext> options) : base(options)
         { }

@@ -1,5 +1,7 @@
-﻿using ProjetoRSP.Shared.Enum;
+﻿using ProjectRSP.Models;
+using ProjetoRSP.Shared.Enum;
 using System;
+using System.Collections.Generic;
 
 namespace ProjetoRSP.Models
 {
@@ -13,6 +15,7 @@ namespace ProjetoRSP.Models
         public string Celular { get; set; }
         public string Senha { get; set; }
         public string ContatoEmergencia { get; set; }
+        public List<PessoaRole> PessoaRoles { get; set; } = new List<PessoaRole>();
         public TipoSanguineo TipoSanguineo { get; set; }
         public Sexo Sexo { get; set; }
 

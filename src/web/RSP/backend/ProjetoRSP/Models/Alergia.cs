@@ -7,8 +7,6 @@
         public Alergia() { }
 
         public Alergia(string nome)
-        {
-            Nome = nome;
-        }
+            => Nome = nome;
     }
 }
