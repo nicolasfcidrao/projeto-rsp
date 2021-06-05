@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoRSP.Infra;
 using ProjetoRSP.Models;
@@ -20,6 +21,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IEnumerable<PacienteViewModel> Get()
         {
             return _context.Pacientes.Select(p => new PacienteViewModel
@@ -30,6 +32,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpGet("{pacienteId}")]
+        [Authorize]
         public PacienteViewModel GetById(int pacienteId)
         {
             return _context.Pacientes.Where(p => p.Id == pacienteId).Select(p => new PacienteViewModel
@@ -40,6 +43,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post(PacienteRequest request)
         {
             if (_context.Pessoas.Any(p => p.Cpf == request.Cpf || p.Email == request.Email || p.Rg == request.Rg))

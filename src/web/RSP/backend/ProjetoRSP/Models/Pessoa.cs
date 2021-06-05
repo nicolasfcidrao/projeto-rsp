@@ -2,6 +2,7 @@
 using ProjetoRSP.Shared.Enum;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjetoRSP.Models
 {
@@ -34,5 +35,7 @@ namespace ProjetoRSP.Models
             TipoSanguineo = tipoSanguineo;
             Sexo = sexo;
         }
+        public void AddRolesIds(IEnumerable<int> roleIds)
+            => PessoaRoles.AddRange(roleIds.Select(roleId => new PessoaRole(Id, roleId)));
     }
 }

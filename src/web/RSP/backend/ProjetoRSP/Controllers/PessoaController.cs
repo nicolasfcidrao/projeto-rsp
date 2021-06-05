@@ -62,6 +62,9 @@ namespace ProjectRSP.Controllers
                 return BadRequest("Pessoa já existe");
 
             var pessoa = new Pessoa(request.Cpf, request.Rg, request.Nome, request.Email, request.DataNascimento, request.Celular, request.Senha, request.ContatoEmergencia, request.TipoSanguineo, request.Sexo);
+            if (request.Roles?.Any() == true)
+                pessoa.AddRolesIds(request.Roles);
+            
             _context.Pessoas.Add(pessoa);
             _context.SaveChanges();
             

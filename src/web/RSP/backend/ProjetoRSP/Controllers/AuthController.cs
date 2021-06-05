@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ProjectRSP.Shared.DTOs;
@@ -25,6 +26,7 @@ namespace ProjectRSP.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginRequest request)
         {
             var pessoa = _context
@@ -35,7 +37,8 @@ namespace ProjectRSP.Controllers
                         Id = x.Id,
                         Nome = x.Nome,
                         Email = x.Email,
-                        Senha = x.Senha
+                        Senha = x.Senha,
+                        Role = x.PessoaRoles.FirstOrDefault().Role.Name ?? "user"
                     })
                 .FirstOrDefault();
             
@@ -47,7 +50,8 @@ namespace ProjectRSP.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("id", pessoa.Id.ToString())
+                    new Claim("id", pessoa.Id.ToString()),
+                    new Claim(ClaimTypes.Role, pessoa.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(5), //token will expires 5 minutes after be created
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
@@ -59,6 +63,7 @@ namespace ProjectRSP.Controllers
 
             return Ok(new
             {
+                Id = pessoa.Id,
                 Token = token
             });
         }
