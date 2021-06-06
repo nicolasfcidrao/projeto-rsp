@@ -50,10 +50,10 @@ namespace ProjectRSP.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("id", pessoa.Id.ToString()),
+                    new Claim("Id", pessoa.Id.ToString()),
                     new Claim(ClaimTypes.Role, pessoa.Role.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(5), //token will expires 5 minutes after be created
+                Expires = DateTime.UtcNow.AddHours(1), //token will expires 1 hour after be created
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
             };
 

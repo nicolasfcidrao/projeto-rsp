@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoRSP.Infra;
@@ -21,7 +22,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IEnumerable<PacienteViewModel> Get()
         {
             return _context.Pacientes.Select(p => new PacienteViewModel
@@ -32,7 +33,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpGet("{pacienteId}")]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public PacienteViewModel GetById(int pacienteId)
         {
             return _context.Pacientes.Where(p => p.Id == pacienteId).Select(p => new PacienteViewModel
@@ -43,7 +44,7 @@ namespace ProjetoRSP.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public IActionResult Post(PacienteRequest request)
         {
             if (_context.Pessoas.Any(p => p.Cpf == request.Cpf || p.Email == request.Email || p.Rg == request.Rg))

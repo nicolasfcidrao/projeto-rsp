@@ -36,53 +36,31 @@ namespace ProjetoRSP
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjetoRSP", Version = "v1" });
-                // c.AddSecurityDefinition("Bearer",
-                //     new OpenApiSecurityScheme
-                //     {
-                //         In = ParameterLocation.Header,
-                //         Description = "Please enter into field the word 'Bearer' following by space and JWT", 
-                //         Name = "Authorization", 
-                //         Type = SecuritySchemeType.ApiKey,
-                //         Scheme = "Bearer"
-                //     });
-                //     c.AddSecurityRequirement(
-                //         new OpenApiSecurityRequirement
-                //         {
-                //             {
-                //                 new OpenApiSecurityScheme
-                //                 {
-                //                     Reference = new OpenApiReference
-                //                     {
-                //                         Type = ReferenceType.SecurityScheme,
-                //                         Id = "Bearer"
-                //                     }
-                //                 },
-                //                 Array.Empty<string>()
-                //             }
-                //         }
-                //     );
-                var jwtSecurityScheme = new OpenApiSecurityScheme
-                {
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                    Name = "JWT Authentication",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
-
-                    Reference = new OpenApiReference
+                c.AddSecurityDefinition("Bearer",
+                    new OpenApiSecurityScheme
                     {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
+                        In = ParameterLocation.Header,
+                        Description = "Please enter into field the word 'Bearer' following by space and JWT", 
+                        Name = "Authorization", 
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer"
+                    });
+                c.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
                     }
-                };
-
-                c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { jwtSecurityScheme, Array.Empty<string>() }
-                });
+                );
             });
             services.AddDbContext<ProjectRSPContext>(options => 
             {
@@ -107,7 +85,7 @@ namespace ProjetoRSP
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                //x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
             {
