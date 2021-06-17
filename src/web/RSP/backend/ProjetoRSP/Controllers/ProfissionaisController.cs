@@ -25,9 +25,22 @@ namespace ProjetoRSP.Controllers
         {
             return _context.Profissionais.Select(p => new ProfissionalViewModel
             {
+                Cpf = p.Pessoa.Cpf,
                 Id = p.Id,
                 Nome = p.Pessoa.Nome,
-                CodProfissional = p.CodProfissional
+                CodProfissional = p.CodProfissional,
+                Email = p.Pessoa.Email,
+                Celular = p.Pessoa.Celular,
+                ContatoEmergencia = p.Pessoa.ContatoEmergencia,
+                Especialidade1 = p.Especialidade1,
+                Especialidade2 = p.Especialidade2,
+                Rg = p.Pessoa.Rg,
+                RazaoSocial1 = p.RazaoSocial1,
+                RazaoSocial2 = p.RazaoSocial2,
+                Cnpj = p.Cnpj,
+                DataNascimento = p.Pessoa.DataNascimento,
+                Sexo = p.Pessoa.Sexo,
+                TipoSanguineo = p.Pessoa.TipoSanguineo
             });
         }
 
@@ -36,9 +49,22 @@ namespace ProjetoRSP.Controllers
         {
             return _context.Profissionais.Where(p => p.Id == profissionalId).Select(p => new ProfissionalViewModel
             {
+                Cpf = p.Pessoa.Cpf,
                 Id = p.Id,
                 Nome = p.Pessoa.Nome,
-                CodProfissional = p.CodProfissional
+                CodProfissional = p.CodProfissional,
+                Email = p.Pessoa.Email,
+                Celular = p.Pessoa.Celular,
+                ContatoEmergencia = p.Pessoa.ContatoEmergencia,
+                Especialidade1 = p.Especialidade1,
+                Especialidade2 = p.Especialidade2,
+                Rg = p.Pessoa.Rg,
+                RazaoSocial1 = p.RazaoSocial1,
+                RazaoSocial2 = p.RazaoSocial2,
+                Cnpj = p.Cnpj,
+                DataNascimento = p.Pessoa.DataNascimento,
+                Sexo = p.Pessoa.Sexo,
+                TipoSanguineo = p.Pessoa.TipoSanguineo
             }).FirstOrDefault();
         }
 

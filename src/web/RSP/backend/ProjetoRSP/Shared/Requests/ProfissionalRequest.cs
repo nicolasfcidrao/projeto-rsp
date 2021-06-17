@@ -5,6 +5,7 @@ namespace ProjetoRSP.Shared.Requests
 {
     public class ProfissionalRequest
     {
+        public int Id { get; set; }
         public string Cpf { get; set; }
         public string Rg { get; set; }
         public string Nome { get; set; }

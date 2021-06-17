@@ -24,8 +24,27 @@ namespace ProjetoRSP.Controllers
         {
             return _context.Pacientes.Select(p => new PacienteViewModel
             {
+                Cpf = p.Pessoa.Cpf,
                 Id = p.Id,
-                Nome = p.Pessoa.Nome
+                Nome = p.Pessoa.Nome,
+                ContatoEmergencia = p.Pessoa.ContatoEmergencia,
+                Rg = p.Pessoa.Rg,
+                TipoSanguineo = p.Pessoa.TipoSanguineo,
+                Sexo = p.Pessoa.Sexo,
+                DataNascimento = p.Pessoa.DataNascimento,
+                NomeDoPai = p.NomeDoPai,
+                NomeDaMae = p.NomeDaMae,
+                Celular = p.Pessoa.Celular,
+                InfectadoCovid = p.InfectadoCovid,
+                QuantasVezesInfectado = p.QuantasVezesInfectado,
+                Email = p.Pessoa.Email,
+                Estado = p.Estado,
+                Bairro = p.Bairro,
+                Cep = p.Cep,
+                Cidade = p.Cidade,
+                Complemento = p.Complemento,
+                Logradouro = p.Logradouro,
+                Numero = p.Numero
             });
         }
 
@@ -34,8 +53,27 @@ namespace ProjetoRSP.Controllers
         {
             return _context.Pacientes.Where(p => p.Id == pacienteId).Select(p => new PacienteViewModel
             {
+                Cpf = p.Pessoa.Cpf,
                 Id = p.Id,
-                Nome = p.Pessoa.Nome
+                Nome = p.Pessoa.Nome,
+                ContatoEmergencia = p.Pessoa.ContatoEmergencia,
+                Rg = p.Pessoa.Rg,
+                TipoSanguineo = p.Pessoa.TipoSanguineo,
+                Sexo = p.Pessoa.Sexo,
+                DataNascimento = p.Pessoa.DataNascimento,
+                NomeDoPai = p.NomeDoPai,
+                NomeDaMae = p.NomeDaMae,
+                Celular = p.Pessoa.Celular,
+                InfectadoCovid = p.InfectadoCovid,
+                QuantasVezesInfectado = p.QuantasVezesInfectado,
+                Email = p.Pessoa.Email,
+                Estado = p.Estado,
+                Bairro = p.Bairro,
+                Cep = p.Cep,
+                Cidade = p.Cidade,
+                Complemento = p.Complemento,
+                Logradouro = p.Logradouro,
+                Numero = p.Numero
             }).FirstOrDefault();
         }
 
